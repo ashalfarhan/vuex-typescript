@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h1>Post App</h1>
-    <div>
+  <div class="container mx-auto">
+    <h1 class="font-semibold text-4xl my-4">Post App</h1>
+    <div class="flex flex-col space-y-4">
       <div v-for="post in posts" :key="post.id">
-        <h3>{{ post.title }}</h3>
+        <h3 class="font-semibold text-2xl">{{ post.title }}</h3>
         <p>{{ post.body }}</p>
       </div>
     </div>
@@ -11,9 +11,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
 import { useStore } from "@/store";
-import { TAction } from "@/types";
 
 export default defineComponent({
   name: "Posts",
@@ -26,5 +25,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style></style>
