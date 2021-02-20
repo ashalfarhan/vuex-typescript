@@ -5,9 +5,10 @@ import {
   Mutations,
   State,
   Store,
-  TAction,
   Post,
+  TAction,
   TMutation,
+  AugmentedActionContext,
 } from "@/types";
 import { ActionTree, createStore, GetterTree, MutationTree } from "vuex";
 
@@ -19,18 +20,19 @@ const state: State = {
   posts: [],
 };
 const mutations: MutationTree<State> & Mutations = {
-  [TMutation.ADD](state, payload: Post) {
-    state.post = payload;
+  [TMutation.ADD](state: State, payload: Post) {
+    state.posts = [payload, ...state.posts];
   },
-  [TMutation.LOAD](state, payload: Post[]) {
+  [TMutation.LOAD](state: State, payload: Post[]) {
     state.posts = [...payload, ...state.posts];
   },
 };
 const actions: ActionTree<State, State> & Actions = {
-  [TAction.ADD]({ commit }, payload: Post) {
+  [TAction.ADD]({ commit }: AugmentedActionContext, payload: Post) {
+    console.log(payload);
     commit(TMutation.ADD, payload);
   },
-  async [TAction.FETCH]({ commit }) {
+  async [TAction.FETCH]({ commit }: AugmentedActionContext) {
     try {
       const response = await fetch(API_URL);
       const data: Post[] = await response.json();
@@ -41,7 +43,7 @@ const actions: ActionTree<State, State> & Actions = {
   },
 };
 const getters: GetterTree<State, State> & Getters = {
-  getAll: (state) => {
+  getAll: (state: State) => {
     return state.posts;
   },
 };
