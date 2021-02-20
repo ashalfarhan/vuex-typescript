@@ -1,17 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <Posts />
+  <Post />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent, onMounted } from "vue";
+import { useStore } from "@/store";
+import { TAction } from "@/types";
+import Posts from "@/components/Posts.vue";
+import Post from "@/components/Post.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    Posts,
+    Post,
+  },
+  setup() {
+    const store = useStore();
+    onMounted(() => {
+      store.dispatch(TAction.FETCH);
+    });
+  },
 });
 </script>
 
