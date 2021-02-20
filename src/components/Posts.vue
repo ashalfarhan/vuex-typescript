@@ -1,7 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="font-semibold text-4xl my-4">Post App</h1>
-    <div class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-4 text-left">
       <div v-for="post in posts" :key="post.id">
         <h3 class="font-semibold text-2xl">{{ post.title }}</h3>
         <p>{{ post.body }}</p>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-4xl text-center">Add your post here</h1>
+    <h1 class="text-4xl text-center mb-8">Add your post here</h1>
     <div>
       <form
         class="max-w-lg mx-auto w-full flex flex-col space-y-4"
@@ -22,7 +22,11 @@
             class="px-2 pt-2 pb-12 focus:outline-none border-2 border-blue-300"
           />
         </div>
-        <input type="submit" value="Submit" class="p-3 focus:outline-none" />
+        <input
+          type="submit"
+          value="Submit"
+          class="p-3 focus:outline-none bg-blue-200 cursor-pointer"
+        />
       </form>
     </div>
   </div>
@@ -42,12 +46,11 @@ export default defineComponent({
       body: "",
     });
 
-    const handleSubmit = (e: HTMLFormElement) => {
+    const handleSubmit = () => {
       store.dispatch(TAction.ADD, {
         title: userInput.title,
         body: userInput.body,
       });
-      console.log(userInput.title);
       userInput.title = "";
       userInput.body = "";
     };
